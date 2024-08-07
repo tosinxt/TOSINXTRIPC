@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Zypher Assets Limited</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/odometer.css">
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+    <link rel="stylesheet" href="assets/css/owl.min.css">
+    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="shortcut icon" href="icon-removebg-preview.png" type="image/x-icon">
+</head>
+<body>
+
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <!--============= Sign In Section Starts Here =============-->
+    <div class="account-section bg_img" data-background="assets/images/account-bg.jpg">
+        <div class="container">
+            <div class="account-title text-center">
+                <a href="index.html" class="back-home"><i class="fas fa-angle-left"></i><span>Back <span class="d-none d-sm-inline-block">To Zypher Assets</span></span></a>
+                <a href="#0" class="logo">
+                    <img src="Zypher Assets11/default-removebg-preview.png" alt="logo">
+                </a>
+            </div>
+            <div class="account-wrapper">
+                <div class="account-body">
+                    <h4 class="title mb-20">Welcome To Zypher Assets</h4>
+                    <form id="login-form" class="account-form">
+                        <div class="form-group">
+                            <label for="sign-in-email">Your Email </label>
+                            <input type="email" placeholder="Enter Your Email " id="sign-in-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sign-in-password">Password</label>
+                            <input type="password" placeholder="Enter Your Password" id="sign-in-password" name="password" required>
+                            <span class="sign-in-recovery">Forgot your password? <a href="#0">recover password</a></span>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="mt-2 mb-2">Sign In</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="or">
+                    <span>OR</span>
+                </div>
+                <div class="account-header pb-0">
+                    <span class="d-block mb-30 mt-2">Sign up with your work email</span>
+                    <a href="#0" class="sign-in-with"><img src="assets/images/icon/google.png" alt="icon"><span>Sign Up with Google</span></a>
+                    <span class="d-block mt-15">Don't have an account? <a href="sign-up.html">Sign Up Here</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--============= Sign In Section Ends Here =============-->
+    
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/modernizr-3.6.0.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/magnific-popup.min.js"></script>
+    <script src="assets/js/jquery-ui.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/odometer.min.js"></script>
+    <script src="assets/js/viewport.jquery.js"></script>
+    <script src="assets/js/nice-select.js"></script>
+    <script src="assets/js/owl.min.js"></script>
+    <script src="assets/js/paroller.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('sign-in-email').value;
+            const password = document.getElementById('sign-in-password').value;
+            
+            try {
+                const response = await fetch('http://localhost:5000/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Login successful!');
+                    // Optionally, store the JWT token in localStorage
+                    localStorage.setItem('token', data.token);
+                    // Redirect to the protected page
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert(data.msg);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>
